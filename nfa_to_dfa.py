@@ -62,7 +62,7 @@ def tabel_T(qi, alphabet):
 	return t;
 
 """
-possible states
+finding new states
 """
 new_states = list()
 for x in language_alphabets:
@@ -70,6 +70,38 @@ for x in language_alphabets:
 		bc = (tabel_T(str(y),x))
 		if bc not in new_states and bc !=set():
 			new_states.append(bc)
-print(new_states[1])
+new_ways = [];
+union = list();
+new_list = list();
+''''
+for x in language_alphabets:
+	for y in new_states:
+		for k in y:
+			table_t_variables = tabel_T(k,x);
+			for i in table_t_variables:
+				if i not in union:
+					union.append(i)
+		new_set.append(y)
+	new_set.append(union)
+	new_set.append(x)
+	new_ways.append(new_set)
+	union = list()
+	new_list = list()
+'''
+for x in new_states:
+	for y in language_alphabets:
+		for k in x:
+			table_t_variables = tabel_T(k,y);
+			for i in table_t_variables:
+				if i not in union:
+					union.append(i)
+		new_list.append(y)
+		new_list.append(x)
+		new_list.append(union)
+		new_ways.append(new_list)
+		union = list()
+		new_list = list()
+print(new_ways)
+			
 
 
