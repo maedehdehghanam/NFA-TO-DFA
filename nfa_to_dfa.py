@@ -70,24 +70,14 @@ for x in language_alphabets:
 		bc = (tabel_T(str(y),x))
 		if bc not in new_states and bc !=set():
 			new_states.append(bc)
+
+"""
+finding new ways
+"""
 new_ways = [];
 union = list();
 new_list = list();
-''''
-for x in language_alphabets:
-	for y in new_states:
-		for k in y:
-			table_t_variables = tabel_T(k,x);
-			for i in table_t_variables:
-				if i not in union:
-					union.append(i)
-		new_set.append(y)
-	new_set.append(union)
-	new_set.append(x)
-	new_ways.append(new_set)
-	union = list()
-	new_list = list()
-'''
+
 for x in new_states:
 	for y in language_alphabets:
 		for k in x:
@@ -101,7 +91,16 @@ for x in new_states:
 		new_ways.append(new_list)
 		union = list()
 		new_list = list()
+"""
+determinig DFA ways without e ways
+"""
+DFA_Ways = list()
+for x in new_ways:
+	if x[0] != '-':
+		DFA_Ways.append(x);
+
 print(new_ways)
+print(DFA_Ways)
 			
 
 
