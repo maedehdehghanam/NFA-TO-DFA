@@ -15,5 +15,12 @@ for x in range(0,int(s)):
 	initial_states.append(k)
 
 language_alphabets=[];
+ways = []
 for x in range(0,int(m)):
 	alphabet, s1, s2 = input().split()
+	if alphabet not in language_alphabets:
+		language_alphabets.append(alphabet);
+	ways.append(alphabet + " "+ s1+ " "+ s2);
+print(language_alphabets);
+print(ways);
+
