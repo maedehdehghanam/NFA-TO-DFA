@@ -1,7 +1,10 @@
-from tabulate import tabulate
+"""
+inputs
+"""
 m,n,s,q= input().split();
 final_states =[];
 i =1;
+
 for x in range(0,int(n)):
 	k = input()
 	if k=='1':
@@ -98,9 +101,14 @@ DFA_Ways = list()
 for x in new_ways:
 	if x[0] != '-':
 		DFA_Ways.append(x);
-
-print(new_ways)
-print(DFA_Ways)
-			
-
+"""
+finding the new initial satates 
+"""
+new_initial_states = list()
+for x in initial_states:
+	ns = epsilon_closure(x)
+	for y in ns:
+		if y not in new_initial_states:
+			new_initial_states.append(y)
+print(new_initial_states)
 
