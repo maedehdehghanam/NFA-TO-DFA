@@ -78,7 +78,6 @@ def string_reader(final_s, initial_s, ways, word):
 				flag = True
 				break;
 		if flag==False:
-			print("oh")
 			print("NO", end = " ")
 			for j in range(0,len(passed)):
 				if j!= len(passed)-1:
@@ -90,9 +89,9 @@ def string_reader(final_s, initial_s, ways, word):
 		print('YES', end = " ")
 		for j in range(0,len(passed)):
 				if j!= len(passed)-1:
-					print(passed[i], end =" ")
+					print(passed[j], end =" ")
 				else:
-					print(passed[i])
+					print(passed[j])
 	else:
 		print("NO", end = " ")
 		for j in range(0,len(passed)):
