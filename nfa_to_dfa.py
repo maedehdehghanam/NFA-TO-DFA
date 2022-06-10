@@ -78,7 +78,7 @@ for x in language_alphabets:
 finding new ways
 """
 new_ways = [];
-union = set();
+union = list();
 new_list = list();
 
 for x in new_states:
@@ -87,19 +87,19 @@ for x in new_states:
 			table_t_variables = tabel_T(k,y);
 			for i in table_t_variables:
 				if i not in union:
-					union.add(i)
+					union.append(i)
 		new_list.append(y)
-		new_list.append(x)
+		new_list.append(list(x))
 		new_list.append(union)
 		new_ways.append(new_list)
-		union = set()
+		union = list()
 		new_list = list()
 """
 determinig DFA ways without e ways
 """
 DFA_Ways = list()
 for x in new_ways:
-	if x[0] != '-' and x[3] !=set():
+	if x[0] != '-' and x[2] !=list():
 		DFA_Ways.append(x);
 """
 finding the new initial satates 
@@ -114,4 +114,8 @@ for x in initial_states:
 renaming new states
 """
 print(DFA_Ways)
-
+"""
+for x in DFA_Ways:
+	for i in range(0,len(new_states)):
+		if 
+"""
