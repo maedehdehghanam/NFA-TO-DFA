@@ -1,21 +1,15 @@
 """
 inputs
 """
-m,n,s,q= input().split();
+n,m,s,q= input().split();
 final_states =[];
-i =1;
-
-for x in range(0,int(n)):
-	k = input()
-	if k=='1':
-		final_states.append(i);
-	i = i+1;
+fs = input().split();
+for i in range(0,len(fs)):
+	if fs[i]=='1':
+		final_states.append(str(i+1))
 
 
-initial_states = []
-for x in range(0,int(s)):
-	k = input()
-	initial_states.append(k)
+initial_states = input().split();
 
 language_alphabets=[];
 ways = []
@@ -25,6 +19,10 @@ for x in range(0,int(m)):
 		language_alphabets.append(alphabet);
 	ways.append(alphabet + " "+ s1+ " "+ s2);
 
+words =list()
+for i in range(0,int(q)):
+	nw= input()
+	words.append(nw)
 """
 calculating epsilon closure
 """
@@ -63,6 +61,45 @@ def tabel_T(qi, alphabet):
 	for w in delta:
 		t= t.union(epsilon_closure(w))
 	return t;
+"""
+reading  astring with a dfa
+"""
+def string_reader(final_s, initial_s, ways, word):
+	
+	pointer = initial_s
+	temp = word;
+	passed= list()
+	for i in range(0, len(word)):
+		for x in DFA_Ways:
+			flag = False;
+			if x[0]==word[i] and pointer == x[1]:
+				pointer = x[2]
+				passed.append(x[2])
+				flag = True
+				break;
+		if flag==False:
+			print("oh")
+			print("NO", end = " ")
+			for j in range(0,len(passed)):
+				if j!= len(passed)-1:
+					print(passed[j], end =" ")
+				else:
+					print(passed[j])
+			break;
+	if pointer in final_s:
+		print('YES', end = " ")
+		for j in range(0,len(passed)):
+				if j!= len(passed)-1:
+					print(passed[i], end =" ")
+				else:
+					print(passed[i])
+	else:
+		print("NO", end = " ")
+		for j in range(0,len(passed)):
+			if j!= len(passed)-1:
+				print(passed[j], end =" ")
+			else:
+				print(passed[j])
 
 """
 finding new states
@@ -114,14 +151,19 @@ for x in initial_states:
 """
 renaming new states
 """
-
 for x in DFA_Ways:
+	#print(x)
+	flag1 = False;
+	flag2 = False ;
 	for i in range(0,len(new_states)):
-
-		if set(x[1])== set(new_states[i]):
+		#print(x[1] , new_states[i])
+		if set(x[1])== set(new_states[i]) and flag1==False:
+			flag1=True
 			x[1] = str(i+1)
-		if set(x[2])== set(new_states[i]):
+		if set(x[2])== set(new_states[i]) and flag2==False:
+			flag2 = True
 			x[2] = str(i+1)
+	#print(x)
 """
 the new initial state
 """
@@ -139,21 +181,22 @@ for i in range(0,len(new_states)):
 		if str(y) in new_states[i]:
 			if str(i+1) not in newـfinalـstates:
 				newـfinalـstates.append(str(i+1))
-def string_reader(final_s, initial_s, ways, word):
-	pointer = initial_s
-	temp = word;
-	for i in range(0, len(word)):
-		for x in DFA_Ways:
-			flag = False;
-			if x[0]==word[i] and pointer == x[1]:
-				pointer = x[2]
-				flag = True
-				break;
-		if flag==False:
-			print("NO")
-			break;
-	if pointer in final_s:
-		print('YES')
-		
-print(DFA_Ways)
-string_reader(newـfinalـstates, new_initial_states[0],DFA_Ways, input())
+"""
+end
+"""
+print(len(new_states), len(DFA_Ways), new_initial_states[0])
+for i in range(0,len(new_states)):
+	if str(i+1) in final_states:
+		if i != len(new_states)-1:
+			print('1', end = " ")
+		else:
+			print('1')
+	else:
+		if i != len(new_states)-1:
+			print('0', end = " ")
+		else:
+			print('0')
+for x in DFA_Ways:
+	print(x[0],x[1],x[2])
+for x in words:
+	string_reader(newـfinalـstates, new_initial_states[0], DFA_Ways, x)
