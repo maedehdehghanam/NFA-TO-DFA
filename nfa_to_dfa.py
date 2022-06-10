@@ -117,10 +117,27 @@ renaming new states
 
 for x in DFA_Ways:
 	for i in range(0,len(new_states)):
+
 		if x[1]== new_states[i]:
 			x[1] = str(i+1)
 		if x[2]== new_states[i]:
 			x[2] = str(i+1)
+"""
+the new initial state
+"""
 
-print(new_states)
-print(DFA_Ways)
+for x in range(0,len(new_states)):
+	if new_initial_states == new_states[i]:
+		new_initial_states = list()
+		new_initial_states.append(str(i+1))
+"""
+the new final states
+""" 
+newـfinalـstates = list()
+for i in range(0,len(new_states)):
+	for y in final_states:
+		print(new_states[i])
+		if str(y) in new_states[i]:
+			if str(i+1) not in newـfinalـstates:
+				newـfinalـstates.append(str(i+1))
+
