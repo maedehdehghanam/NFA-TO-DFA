@@ -118,16 +118,16 @@ renaming new states
 for x in DFA_Ways:
 	for i in range(0,len(new_states)):
 
-		if x[1]== new_states[i]:
+		if set(x[1])== set(new_states[i]):
 			x[1] = str(i+1)
-		if x[2]== new_states[i]:
+		if set(x[2])== set(new_states[i]):
 			x[2] = str(i+1)
 """
 the new initial state
 """
 
 for x in range(0,len(new_states)):
-	if new_initial_states == new_states[i]:
+	if set(new_initial_states) == set(new_states[i]):
 		new_initial_states = list()
 		new_initial_states.append(str(i+1))
 """
@@ -136,8 +136,24 @@ the new final states
 newـfinalـstates = list()
 for i in range(0,len(new_states)):
 	for y in final_states:
-		print(new_states[i])
 		if str(y) in new_states[i]:
 			if str(i+1) not in newـfinalـstates:
 				newـfinalـstates.append(str(i+1))
-
+def string_reader(final_s, initial_s, ways, word):
+	pointer = initial_s
+	temp = word;
+	for i in range(0, len(word)):
+		for x in DFA_Ways:
+			flag = False;
+			if x[0]==word[i] and pointer == x[1]:
+				pointer = x[2]
+				flag = True
+				break;
+		if flag==False:
+			print("NO")
+			break;
+	if pointer in final_s:
+		print('YES')
+		
+print(DFA_Ways)
+string_reader(newـfinalـstates, new_initial_states[0],DFA_Ways, input())
