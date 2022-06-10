@@ -73,7 +73,8 @@ for x in language_alphabets:
 		bc = (tabel_T(str(y),x))
 		if bc not in new_states and bc !=set():
 			new_states.append(bc)
-
+for i in range(0,len(new_states)):
+	new_states[i]=list(new_states[i])
 """
 finding new ways
 """
@@ -113,9 +114,13 @@ for x in initial_states:
 """
 renaming new states
 """
-print(DFA_Ways)
-"""
+
 for x in DFA_Ways:
 	for i in range(0,len(new_states)):
-		if 
-"""
+		if x[1]== new_states[i]:
+			x[1] = str(i+1)
+		if x[2]== new_states[i]:
+			x[2] = str(i+1)
+
+print(new_states)
+print(DFA_Ways)
