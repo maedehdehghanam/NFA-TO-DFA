@@ -1,4 +1,8 @@
 """
+you may forgive me for my dirty code!
+"""
+
+"""
 inputs
 """
 n,m,s,q= input().split();
@@ -69,36 +73,42 @@ def string_reader(final_s, initial_s, ways, word):
 	pointer = initial_s
 	temp = word;
 	passed= list()
-	for i in range(0, len(word)):
-		for x in DFA_Ways:
-			flag = False;
-			if x[0]==word[i] and pointer == x[1]:
-				pointer = x[2]
-				passed.append(x[2])
-				flag = True
+	if word =='-':
+		if initial_s in final_s:
+			print('YES')
+	else:
+		for i in range(0, len(word)):
+			flagDone = True;
+			for x in DFA_Ways:
+				flag = False;
+				if x[0]==word[i] and pointer == x[1]:
+					pointer = x[2]
+					passed.append(x[2])
+					flag = True
+					break;
+			if flag==False:
+				flagDone=False;
+				print("NO", end = " ")
+				for j in range(0,len(passed)):
+					if j!= len(passed)-1:
+						print(passed[j], end =" ")
+					else:
+						print(passed[j])
 				break;
-		if flag==False:
-			print("NO", end = " ")
+		if pointer in final_s and flagDone!=False:
+			print('YES', end = " ")
+			for j in range(0,len(passed)):
+					if j!= len(passed)-1:
+						print(passed[j], end =" ")
+					else:
+						print(passed[j])
+		if pointer not in final_s and flagDone!=False:
+			print("NO", end = " " )
 			for j in range(0,len(passed)):
 				if j!= len(passed)-1:
 					print(passed[j], end =" ")
 				else:
 					print(passed[j])
-			break;
-	if pointer in final_s:
-		print('YES', end = " ")
-		for j in range(0,len(passed)):
-				if j!= len(passed)-1:
-					print(passed[j], end =" ")
-				else:
-					print(passed[j])
-	else:
-		print("NO", end = " ")
-		for j in range(0,len(passed)):
-			if j!= len(passed)-1:
-				print(passed[j], end =" ")
-			else:
-				print(passed[j])
 
 """
 finding new states
@@ -185,7 +195,7 @@ end
 """
 print(len(new_states), len(DFA_Ways), new_initial_states[0])
 for i in range(0,len(new_states)):
-	if str(i+1) in final_states:
+	if str(i+1) in newـfinalـstates:
 		if i != len(new_states)-1:
 			print('1', end = " ")
 		else:
