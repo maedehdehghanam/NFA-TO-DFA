@@ -75,7 +75,7 @@ def string_reader(final_s, initial_s, ways, word):
 	passed= list()
 	if word =='-':
 		if initial_s in final_s:
-			print('YES')
+			print('Yes')
 	else:
 		for i in range(0, len(word)):
 			flagDone = True;
@@ -88,27 +88,36 @@ def string_reader(final_s, initial_s, ways, word):
 					break;
 			if flag==False:
 				flagDone=False;
-				print("NO", end = " ")
+				if len(passed)==0:
+					print("No")
+				else:
+					print("No", end = " ")
+					for j in range(0,len(passed)):
+						if j!= len(passed)-1:
+							print(passed[j], end =" ")
+						else:
+							print(passed[j])
+				break;
+		if pointer in final_s and flagDone!=False:
+			if len(passed)==0:
+					print("Yes")
+			else:
+				print('Yes', end = " ")
+				for j in range(0,len(passed)):
+						if j!= len(passed)-1:
+							print(passed[j], end =" ")
+						else:
+							print(passed[j])
+		if pointer not in final_s and flagDone!=False:
+			if len(passed)==0:
+					print("No")
+			else:
+				print("No", end = " " )
 				for j in range(0,len(passed)):
 					if j!= len(passed)-1:
 						print(passed[j], end =" ")
 					else:
 						print(passed[j])
-				break;
-		if pointer in final_s and flagDone!=False:
-			print('YES', end = " ")
-			for j in range(0,len(passed)):
-					if j!= len(passed)-1:
-						print(passed[j], end =" ")
-					else:
-						print(passed[j])
-		if pointer not in final_s and flagDone!=False:
-			print("NO", end = " " )
-			for j in range(0,len(passed)):
-				if j!= len(passed)-1:
-					print(passed[j], end =" ")
-				else:
-					print(passed[j])
 
 """
 finding new states
