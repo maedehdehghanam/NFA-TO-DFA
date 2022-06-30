@@ -73,7 +73,7 @@ def string_reader(final_s, initial_s, ways, word):
 	pointer = initial_s
 	temp = word;
 	passed= list()
-	if word =='-':
+	if word =='':
 		if initial_s in final_s:
 			print('Yes')
 	else:
@@ -122,34 +122,48 @@ def string_reader(final_s, initial_s, ways, word):
 """
 finding new states
 """
+
 new_states = list()
 for x in language_alphabets:
 	for y in range(1,int(n)+1):
 		bc = (tabel_T(str(y),x))
+		print(bc)
 		if bc not in new_states and bc !=set():
 			new_states.append(bc)
 for i in range(0,len(new_states)):
 	new_states[i]=list(new_states[i])
+
+
 """
 finding new ways
 """
 new_ways = [];
 union = list();
 new_list = list();
+new_states_2 = list();
+while new_states_2 != new_states:
+	new_states_2 = new_states
+	for x in new_states_2:
+		for y in language_alphabets:
+			for k in x:
+				table_t_variables = tabel_T(k,y);
+				for i in table_t_variables:
+					if i not in union:
+						union.append(i)
 
-for x in new_states:
-	for y in language_alphabets:
-		for k in x:
-			table_t_variables = tabel_T(k,y);
-			for i in table_t_variables:
-				if i not in union:
-					union.append(i)
-		new_list.append(y)
-		new_list.append(list(x))
-		new_list.append(union)
-		new_ways.append(new_list)
-		union = list()
-		new_list = list()
+			for i in range(0,len(new_states)):
+				new_states[i]=set(new_states[i])
+			if set(union) not in new_states and union != list():
+				new_states.append(set(union))
+			for i in range(0,len(new_states)):
+				new_states[i]=list(new_states[i])
+			new_list.append(y)
+			new_list.append(list(x))
+			new_list.append(union)
+			new_ways.append(new_list)
+			union = list()
+			new_list = list()
+
 """
 determinig DFA ways without e ways
 """
@@ -157,6 +171,7 @@ DFA_Ways = list()
 for x in new_ways:
 	if x[0] != '-' and x[2] !=list():
 		DFA_Ways.append(x);
+print(DFA_Ways)
 """
 finding the new initial satates 
 """
@@ -217,4 +232,6 @@ for i in range(0,len(new_states)):
 for x in DFA_Ways:
 	print(x[0],x[1],x[2])
 for x in words:
+	x = x.replace("-", "")
 	string_reader(newـfinalـstates, new_initial_states[0], DFA_Ways, x)
+print(new_states)
